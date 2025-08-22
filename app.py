@@ -1,30 +1,23 @@
 import streamlit as st
 from llm_chain import get_chain
-from langchain_core.messages import HumanMessage, AIMessage  # ADDED
  
 st.title("Smart Chatbot")
  
-# ADDED: init memory once
-if "history" not in st.session_state:
-    st.session_state.history = []
+# keep the same chain (and its memory) across button clicks
+# streamlit reruns the script every click, so without this it forgets
+if "chain" not in st.session_state:
+    st.session_state.chain = get_chain()
  
-user_input = st.text_input("Please Enter Your Question Here")
+# input box + button
+user_input = st.text_input("Enter your question")
 search_button = st.button("Search")
  
+# handle button click
 if search_button:
-    if user_input.strip() != "":
-        chain = get_chain()
-        with st.spinner("Thinking..."):
-            # ADDED: pass history to the chain
-            response = chain.invoke({
-                "question": user_input,
-                "history": st.session_state.history
-            })
- 
-        st.write(response.content)
- 
-        # ADDED: update memory after each turn
-        st.session_state.history.append(HumanMessage(content=user_input))
-        st.session_state.history.append(AIMessage(content=response.content))
+    if user_input.strip():
+        chain = st.session_state.chain  # reuse same chain every time
+        response = chain.invoke({"question": user_input})
+        # chain returns {"text": "...answer..."}
+        st.write(response["text"])
     else:
         st.warning("Please enter a question to get a response.")
