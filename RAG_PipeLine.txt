@@ -1,0 +1,71 @@
+❓ Q1: What is RAG?
+ 
+Answer (10 sec):
+“RAG stands for Retrieval-Augmented Generation. It improves LLMs by retrieving relevant info from an external knowledge base and then generating the answer based on that info. This keeps answers accurate, up-to-date, and reduces hallucinations.”
+ 
+ 
+---
+ 
+❓ Q2: Can you explain the RAG pipeline?
+ 
+Answer (30 sec):
+“The pipeline works like this:
+ 
+1. Documents (like PDFs, FAQs, websites)
+ 
+ 
+2. Chunking (split into smaller parts)
+ 
+ 
+3. Embeddings (convert chunks into vectors)
+ 
+ 
+4. Vector DB (store embeddings in FAISS/Pinecone)
+ 
+ 
+5. Retriever (fetch top relevant chunks)
+ 
+ 
+6. LLM (reads chunks + question)
+ 
+ 
+7. Answer (final response).
+This flow is the industry standard, with each step fine-tuned for better performance.”
+ 
+ 
+ 
+ 
+---
+ 
+❓ Q3: Why use RAG instead of fine-tuning?
+ 
+Answer (20 sec):
+“Fine-tuning permanently updates the model with new data but it’s costly, slow, and needs retraining when data changes.
+RAG doesn’t retrain the model — it dynamically retrieves updated info from a knowledge base.
+So RAG is cheaper, faster, and always gives the latest answers.”
+ 
+ 
+---
+ 
+❓ Q4: Can you give a real-world example of RAG?
+ 
+Answer (20 sec):
+“For example, in a banking chatbot:
+ 
+Store FAQs in a vector DB.
+ 
+When a customer asks ‘How do I reset my password?’, the retriever fetches the relevant chunk.
+ 
+The LLM then generates a clean answer using that chunk.
+This way, the bot only answers from bank-approved documents, avoiding hallucination.”
+ 
+ 
+ 
+---
+ 
+❓ Q5: What are some challenges or improvements in RAG?
+ 
+Answer (30 sec):
+“Some challenges include picking the right chunk size, ensuring embeddings capture meaning, and handling irrelevant retrievals.
+Industry improvements include semantic chunking, better vector DBs (Pinecone, Weaviate), rerankers, prompt engineering, and adding guardrails so the LLM answers safely.
+But the core pipeline remains the same: Docs → Chunking → Embeddings → Vector DB → Retriever → LLM → Answer.”

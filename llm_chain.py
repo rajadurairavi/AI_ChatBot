@@ -1,3 +1,4 @@
+#pip install langchain langchain-groq langchain-core streamlit
 import os
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -9,7 +10,7 @@ def get_chain():
     # 1) connect to Groq LLM using API key from environment
     llm = ChatGroq(
         groq_api_key=os.getenv("GROQ_API_KEY"),  # never hardcode keys
-        model_name="llama3-8b-8192",             # Groq-hosted model
+        model_name="llama-3.1-8b-instant",             # Groq-hosted model
     )
  
     # 2) build a chat-style prompt (professional best practice)
